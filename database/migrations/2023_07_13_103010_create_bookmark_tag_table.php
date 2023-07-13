@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
-            $table->string("slug")->unique();
+        Schema::create('bookmark_tag', function (Blueprint $table) {
+            $table->foreignId('bookmark_id')->index()->constrained()->cascadeOnDelete();
+            $table->foreignId('tag_id')->index()->constrained()->cascadeOnDelete();
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('bookmark_tag');
     }
 };
